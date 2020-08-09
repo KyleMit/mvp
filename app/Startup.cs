@@ -28,7 +28,7 @@ namespace app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddAzureAD(options => Configuration.Bind("AzureAd", options));
+                    .AddAzureAD(options => Configuration.Bind("AzureAd", options));
 
             services.AddControllersWithViews(options =>
             {
