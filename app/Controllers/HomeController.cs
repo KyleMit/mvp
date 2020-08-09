@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using app.Models;
+using mvp.app.Models;
 
-namespace app.Controllers
+namespace mvp.app.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -18,6 +18,7 @@ namespace app.Controllers
         {
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
