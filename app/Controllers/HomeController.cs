@@ -7,20 +7,36 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using mvp.app.Models;
+using mvp.db;
 
 namespace mvp.app.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
+        IDataProvider _dataProvider;
 
-        public HomeController()
+        public HomeController(IDataProvider dataProvider)
         {
+            _dataProvider = dataProvider;
         }
 
         [AllowAnonymous]
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Migrate()
+        {
+            _dataProvider.Migrate();
             return View();
         }
 

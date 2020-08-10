@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using mvp.db;
 
 namespace mvp.app
 {
@@ -37,7 +38,10 @@ namespace mvp.app
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
-           services.AddRazorPages();
+            services.AddRazorPages();
+
+            // add dependency injection
+            services.AddSingleton(typeof(IDataProvider), new DataProvider(Configuration.GetConnectionString("Storage")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
